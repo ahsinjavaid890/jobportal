@@ -21,7 +21,8 @@ class SkillController extends Controller
 
   public function index()
   {
-    return view('admin.skills.index');
+    $skills = Skill::latest()->paginate(10);
+    return view('admin.skills.index', compact('skills'));
   }
 
   public function paginate(Request $request)

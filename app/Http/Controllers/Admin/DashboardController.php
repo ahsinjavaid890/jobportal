@@ -23,6 +23,6 @@ class DashboardController extends Controller
     $superAdminCount = $superAdminRole->users_count;
     $adminCount = $adminRole->users_count;
     $adminCount += $superAdminCount;
-    return view('admin.index', compact('jobCount', 'applicationsCount', 'userCount', 'adminCount'));
+    return view('admin.dashboard.index', compact('jobCount', 'applicationsCount', 'userCount', 'adminCount'));
   }
 }
