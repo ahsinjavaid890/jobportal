@@ -23,7 +23,7 @@ class JobController extends Controller
     $jobs = Job::latest()->withCount('applications')->with([
       'user:users.id,name',
       'category:categories.id,name'
-    ])->get();
+    ])->paginate(10);
     return view('admin.jobs.index', compact('jobs'));
   }
 

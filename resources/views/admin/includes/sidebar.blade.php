@@ -67,51 +67,7 @@
                 </li>
 
 
-                <li class="menu-item">
-                    <a href="{{ url('admin/companies/allcompanies') }}" class="menu-link">
-                        <span class="material-symbols-outlined">store</span>
-                        <span class="menu-text">All Companies</span></i>
-                    </a>
-                </li>
-
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <span class="material-symbols-outlined">inventory</span>
-                        <span class="menu-text">Manage Products</span><i class="menu-arrow"></i>
-                    </a>
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-                            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                <span class="menu-link"><span class="menu-text">Manage Products</span></span>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ url('admin/products/productcategories') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">All
-                                        Product Categories</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ url('admin/products/allproducts') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">All
-                                        Products</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ url('admin/products/addnewproduct') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
-                                        New Products</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="{{ url('admin/quotation/allquotations') }}" class="menu-link menu-toggle">
-                        <span class="material-symbols-outlined">format_quote</span>
-                        <span class="menu-text">Quotations</span>
-                    </a>
-                </li>
+                
                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="{{ url('admin/contact/messages') }}" class="menu-link menu-toggle">
                         <span class="material-symbols-outlined">business_messages</span>
