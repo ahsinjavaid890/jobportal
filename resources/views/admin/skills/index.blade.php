@@ -22,6 +22,11 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{ url('admin/skills') }}" class="text-muted">Job Skills</a>
                                 </li>
+                                @if(isset($_GET['skill_id']))
+                                <li class="breadcrumb-item">
+                                    <a href="javscript::void(0)" class="text-danger">Update Category : {{ DB::table('skills')->where('id' , $_GET['skill_id'])->first()->name }}</a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -55,7 +60,7 @@
                                                 {{ $r->name }}
                                             </td>
                                              <td class="text-center">
-                                               <a class="btn btn-primary btn-sm" href="{{ url('admin/products/edit') }}/{{ $r->id }}"><i class="fa fa-edit"></i>Edit</a>
+                                               <a class="btn btn-primary btn-sm" href="{{ url('admin/skills') }}?skill_id={{ $r->id }}"><i class="fa fa-edit"></i>Edit</a>
                                                <a  data-toggle="modal" data-target="#deleteModal{{ $r->id }}" href="javascript:;" title="Delete" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i>Delete</a>
                                            </td>
                                         </tr>
@@ -73,7 +78,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                                                        <a href="{{ url('admin/products/delete') }}/{{ $r->id }}" class="btn btn-danger font-weight-bold">Yes, Delete it</a>
+                                                        <a href="{{ url('admin/skills/deleteskill') }}/{{ $r->id }}" class="btn btn-danger font-weight-bold">Yes, Delete it</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,20 +92,49 @@
                         </div>
                     </div>
                 </div>
+                @if(isset($_GET['skill_id']))
                 <div class="col-md-5">
                     <div class="card card-custom mt-5">
                         <div class="card-header flex-wrap py-5">
                             <div class="card-title">
                                 <h3 class="card-label">
-                                    Add New Job Skill
-                                    <div class="text-muted pt-2 font-size-sm">Add New Job Skill</div>
+                                    Update Skill
+                                    <div class="text-muted pt-2 font-size-sm">Update Skill</div>
                                 </h3>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="#" id="editForm" method="POST">
+                            <form action="{{ url('admin/skills/updateskill') }}" id="editForm" method="POST">
                               @csrf
-                              @method('PUT')
+                                <input type="hidden" value="{{ $_GET['skill_id'] }}" name="id">
+                                <div class="mb-3">
+                                  <label for="name" class="col-form-label text-secondary">Skill Name</label>
+                                  <input type="text" name="name" value="{{ DB::table('skills')->where('id' , $_GET['skill_id'])->first()->name }}" class="form-control" required autofocus />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="description" class="col-form-label text-secondary">Description</label>
+                                  <textarea name="description" class="form-control">{{ DB::table('skills')->where('id' , $_GET['skill_id'])->first()->description }}</textarea>
+                                </div>
+                                <button id="editBtn" type="submit" class="btn btn-primary">Update
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @else
+                <div class="col-md-5">
+                    <div class="card card-custom mt-5">
+                        <div class="card-header flex-wrap py-5">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Add New Skill
+                                    <div class="text-muted pt-2 font-size-sm">Add New Skill</div>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ url('admin/skills/createskill') }}" id="editForm" method="POST">
+                              @csrf
                                 <div class="mb-3">
                                   <label for="name" class="col-form-label text-secondary">Skill Name</label>
                                   <input type="text" name="name" class="form-control" required autofocus />
@@ -115,6 +149,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <!--end::Card-->
         </div>

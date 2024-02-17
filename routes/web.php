@@ -31,33 +31,27 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group([
-  'as' => 'admin.',
-  'prefix' => 'admin',
-  'namespace' => 'Admin',
-  'middleware' => [
-    'auth', 'role:superadmin|admin'
-  ]
+Route::group(['as' => 'admin.','prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth', 'role:superadmin|admin']
 ], function () {
-  Route::get(
-    '/',
-    function () {
-      return redirect()->route('admin.dashboard');
-    }
-  );
   Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
-  Route::get('/categories/paginate', 'CategoryController@paginate')->name('categories.paginate');
-  Route::resource('/categories', 'CategoryController');
-
-  Route::get('/skills/paginate', 'SkillController@paginate')->name('skills.paginate');
-  Route::resource('/skills', 'SkillController');
-  Route::get('/skills/search', 'SkillController@search')->name('skills.search');
-
   Route::put('/jobs/toggle-status/{job}', 'JobController@toggleStatus')->name('jobs.toggle-status');
   Route::resource('/jobs', 'JobController');
-  Route::get('/admin/users/show/{user}', 'UserController@show')
-    ->name('user.show');
+  Route::get('/admin/users/show/{user}', 'UserController@show')->name('user.show');
+
+
+
+  Route::name('categories.')->prefix('categories')->group(function(){
+      Route::get('/','CategoryController@index');
+      Route::post('/createcategory','CategoryController@createcategory');
+      Route::post('/updatecategory','CategoryController@updatecategory');
+      Route::get('deletecategory/{id}','CategoryController@deletecategory');
+  });
+  Route::name('skills.')->prefix('skills')->group(function(){
+      Route::get('/','SkillController@index');
+      Route::post('/createskill','SkillController@createskill');
+      Route::post('/updateskill','SkillController@updateskill');
+      Route::get('deleteskill/{id}','SkillController@deleteskill');
+  });
 });
 
 Route::group([
@@ -79,3 +73,5 @@ Route::group([
   Route::put('/settings/profile/change-password', 'ProfileController@changePassword')->name('profile.changePassword');
   Route::resource('/settings/profile', 'ProfileController');
 });
+
+

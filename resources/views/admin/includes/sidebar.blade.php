@@ -43,12 +43,12 @@
                             </li>
 
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.categories.index') }}" class="menu-link">
+                                <a href="{{ url('admin/categories') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Job Category</span>
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.skills.index') }}" class="menu-link">
+                                <a href="{{ url('admin/skills') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Job Skill</span>
                                 </a>
                             </li>

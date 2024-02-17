@@ -22,6 +22,11 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{ url('admin/categories') }}" class="text-muted">Job Categories</a>
                                 </li>
+                                @if(isset($_GET['category_id']))
+                                <li class="breadcrumb-item">
+                                    <a href="javscript::void(0)" class="text-danger">Update Category : {{ DB::table('categories')->where('id' , $_GET['category_id'])->first()->name }}</a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -59,7 +64,7 @@
                                                 {{ DB::table('jobs')->where('category_id' , $r->id)->count() }}
                                             </td>
                                            <td class="text-center">
-                                               <a class="btn btn-primary btn-sm" href="{{ url('admin/products/edit') }}/{{ $r->id }}"><i class="fa fa-edit"></i>Edit</a>
+                                               <a class="btn btn-primary btn-sm" href="{{ url('admin/categories') }}?category_id={{ $r->id }}"><i class="fa fa-edit"></i>Edit</a>
                                                <a  data-toggle="modal" data-target="#deleteModal{{ $r->id }}" href="javascript:;" title="Delete" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i>Delete</a>
                                            </td>
                                         </tr>
@@ -77,7 +82,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                                                        <a href="{{ url('admin/products/delete') }}/{{ $r->id }}" class="btn btn-danger font-weight-bold">Yes, Delete it</a>
+                                                        <a href="{{ url('admin/categories/deletecategory') }}/{{ $r->id }}" class="btn btn-danger font-weight-bold">Yes, Delete it</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,6 +96,36 @@
                         </div>
                     </div>
                 </div>
+                @if(isset($_GET['category_id']))
+                <div class="col-md-5">
+                    <div class="card card-custom mt-5">
+                        <div class="card-header flex-wrap py-5">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Update Job Category
+                                    <div class="text-muted pt-2 font-size-sm">Update Job Category</div>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ url('admin/categories/updatecategory') }}" id="editForm" method="POST">
+                              @csrf
+                                <input type="hidden" value="{{ $_GET['category_id'] }}" name="id">
+                                <div class="mb-3">
+                                  <label for="name" class="col-form-label text-secondary">Category Name</label>
+                                  <input type="text" name="name" value="{{ DB::table('categories')->where('id' , $_GET['category_id'])->first()->name }}" class="form-control" required autofocus />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="description" class="col-form-label text-secondary">Description</label>
+                                  <textarea name="description" class="form-control">{{ DB::table('categories')->where('id' , $_GET['category_id'])->first()->description }}</textarea>
+                                </div>
+                                <button id="editBtn" type="submit" class="btn btn-primary">Update
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @else
                 <div class="col-md-5">
                     <div class="card card-custom mt-5">
                         <div class="card-header flex-wrap py-5">
@@ -102,9 +137,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="#" id="editForm" method="POST">
+                            <form action="{{ url('admin/categories/createcategory') }}" id="editForm" method="POST">
                               @csrf
-                              @method('PUT')
                                 <div class="mb-3">
                                   <label for="name" class="col-form-label text-secondary">Category Name</label>
                                   <input type="text" name="name" class="form-control" required autofocus />
@@ -119,6 +153,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <!--end::Card-->
         </div>
