@@ -41,17 +41,14 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="datatable table table-bordered table-striped text-sm">
+                            <table class="table table-bordered">
                                <thead>
                                  <tr>
-                                   <th widith="25%">Job Title</th>
-                                   <th width="10%">Category</th>
-                                   <th width="15%">Created By</th>
-                                   <th width="10%">Deadline</th>
-                                   <th width="15%">Salary (Month)</th>
-                                   <th width="5%">Status</th>
-                                   <th width="5%" class="text-right">Applied</th>
-                                   <th width="15%" class="text-center">Action</th>
+                                   <th>Job Title</th>
+                                   <th>Category</th>
+                                   <th>Status</th>
+                                   <th class="text-right">Applied</th>
+                                   <th class="text-center">Action</th>
                                  </tr>
                                </thead>
                                <tbody>
@@ -59,25 +56,21 @@
                                  <tr>
                                    <td>{{ $job->title }}</td>
                                    <td>{{ $job->category->name }}</td>
-                                   <td>{{ $job->user->name }}</td>
-                                   <td>{{ date('jS M, y', strtotime($job->deadline)) }}</td>
-                                   <td>Rs. {{ $job->monthly_salary_min . ' - Rs. ' . $job->monthly_salary_max }}</td>
                                    <td>{{ $job->status ? "Active" : "Deactive" }}</td>
                                    <td class="text-right">{{ $job->applications_count }}</td>
                                    <td class="text-center">
-                                     <div class="d-flex justify-content-center align-items-center">
+                                     <div class="btn-group">
                                        <a href="{{ route('admin.jobs.show', $job->id) }}" class="btn btn-sm btn-info" title="View Details">
                                          <i class="fas fa-eye"></i>
                                        </a>
-                                       <a href="{{ route('admin.jobs.edit', $job->id) }}" class="btn btn-success btn-sm ml-2" title="Edit">
+                                       <a href="{{ route('admin.jobs.edit', $job->id) }}" class="btn btn-success btn-sm" title="Edit">
                                          <i class="fas fa-edit"></i>
                                        </a>
                                        <form class="toggle-status-form" action="{{ route('admin.jobs.toggle-status', $job->id) }}"
                                          method="post">
                                          @csrf
                                          @method('PUT')
-                                         <button type="submit"
-                                           class="btn {{ $job->status ? "btn-danger" : "btn-primary" }} btn-sm ml-2"
+                                         <button type="submit" class="btn {{ $job->status ? "btn-danger" : "btn-primary" }} btn-sm"
                                            title="{{ $job->status ? "Deactivate" : "Activate" }}">
                                            @if ($job->status)
                                            <i class="fas fa-ban"></i>
@@ -91,7 +84,7 @@
                                          onsubmit="confirmDelete(this, event);">
                                          @csrf
                                          @method('delete')
-                                         <button type="submit" class="btn btn-danger btn-sm ml-2" title="Delete">
+                                         <button type="submit" class="btn btn-danger btn-sm" title="Delete">
                                            <i class="fas fa-trash"></i>
                                          </button>
                                        </form>

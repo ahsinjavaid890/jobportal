@@ -15,23 +15,7 @@ class FrontController extends Controller
 {
   public function index()
   {
-    //$jobColumns = ['id', 'title', 'type', 'city_id', 'deadline', 'monthly_salary_min', 'monthly_salary_max', 'created_at', 'gender', 'company_name', 'slug'];
-    $jobs = Job::latest()->with([
-      'applications:applications.job_id,user_id',
-      'city:cities.id,name',
-      'category:categories.id,name',
-      'skills:id,name'
-    ])->active()->paginate(10);
-
-    if (Auth::check()) {
-      if (Auth::user()->hasRole('user')) {
-        return view('auth.landing', compact('jobs'));
-      } else {
-        return view('admin.landing');
-      }
-    } else {
-      return view('landing');
-    }
+    return view('frontend.homepage.index');
   }
 
   public function search(Request $request)

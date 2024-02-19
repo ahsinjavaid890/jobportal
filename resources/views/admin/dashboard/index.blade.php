@@ -38,36 +38,6 @@
                 		</div>
             		</div>
         		</div>
-        		<div class="col-md-2 mb-4">
-            		<div class="cards">
-                		<div class="card-svg">
-                            <a href="">
-                                <span class="material-symbols-outlined check_box">yard</span>
-                            </a>
-                        </div>
-                		<div class="card-tittle">
-                    		<h4>Registered <br> Users</h4>
-                		</div>
-                		<div class="card-number">
-                    		<h3>{{ $userCount }}</h3>
-                		</div>
-            		</div>
-        		</div>
-        		<div class="col-md-2 mb-4">
-            		<div class="cards">
-                		<div class="card-svg">
-                            <a href="{{ url('admin/sales/allsale') }}">
-                                <span class="material-symbols-outlined point_of_sale">point_of_sale</span>
-                            </a>
-                        </div>
-                		<div class="card-tittle">
-                    		<h4>Registered <br> Admin</h4>
-                		</div>
-                		<div class="card-number">
-                    		<h3>{{ $adminCount }}</h3>
-                		</div>
-            		</div>
-        		</div>
         	</div>
         </div>
      </div>

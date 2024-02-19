@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'FrontController@index')->name('welcome');
+
+
+
 Route::get('/search', 'FrontController@search')
   ->name('search')
   ->middleware(['auth', 'role:user']);
@@ -51,6 +54,21 @@ Route::group(['as' => 'admin.','prefix' => 'admin','namespace' => 'Admin','middl
       Route::post('/createskill','SkillController@createskill');
       Route::post('/updateskill','SkillController@updateskill');
       Route::get('deleteskill/{id}','SkillController@deleteskill');
+  });
+  Route::name('contact.')->prefix('contact')->group(function(){
+      Route::get('/messages','DashboardController@messages');
+      Route::get('/viewmessage/{id}','DashboardController@viewmessage'); 
+      Route::get('/deletemessage/{id}','DashboardController@deletemessage');   
+  });
+  Route::name('blogs.')->prefix('blogs')->group(function(){
+      Route::get('/blogcategories','DashboardController@blogcategories');
+      Route::post('/addnewblogcategory','DashboardController@addnewblogcategory');
+      Route::post('/updatblogcategory','DashboardController@updatblogcategory');
+      Route::get('/deleteblogcategory/{id}','DashboardController@deleteblogcategory');
+      Route::get('/allblogs','DashboardController@allblogs');
+      Route::post('/addnewblog','DashboardController@createblog');
+      Route::post('/updateblog','DashboardController@updateblog');
+      Route::get('/deleteblog/{id}','DashboardController@deleteblog');
   });
 });
 

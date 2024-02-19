@@ -74,7 +74,6 @@ class JobController extends Controller
       'skills' => 'nullable|array',
       'gender' => 'nullable|integer',
       'description' => 'required|string|between:100, 5000',
-      'description_ql' => 'required|string'
     ]);
 
     $newJob = new Job();
@@ -195,7 +194,6 @@ class JobController extends Controller
       'skills' => 'nullable|array',
       'gender' => 'nullable|integer',
       'description' => 'required|string|between:100, 5000',
-      'description_ql' => 'required|string'
     ]);
 
     $job->title = $request->title;
